@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resona | AI Customer Support</title>
+
+<style>
+:root {
+  --bg: #090d13;
+  --sidebar: #121113;
+  --panel: #131a24;
+  --border: #303b49;
+  --text: #f5f5f8;
+  --muted: #b3bdcf;
+  --orange: #ff9257;
+  --green: #4cdaa0;
+  --red: #ff7777;
+  --gold: #e8c76a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  color: var(--text);
+  background: var(--bg);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.app {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  grid-template-columns: 245px minmax(0, 1fr) 310px;
+  overflow: hidden;
+}
+
+/* GOLD RESONA LOGO */
+.resona-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  overflow: visible;
+  filter:
+    drop-shadow(0 0 5px rgba(232,199,106,.45))
+    drop-shadow(0 0 13px rgba(201,154,53,.2));
+}
+
+.brandmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* SIDEBAR */
+.sidebar {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 22px 15px 15px;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #191615, #101117 75%);
+  border-right: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+}
+
+.brand-name {
+  font-size: 26px;
+  font-weight: 720;
+  letter-spacing: -.7px;
+  margin: 0;
+}
+
+.brand-tagline {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.nav {
+  display: grid;
+  gap: 7px;
+  margin-top: 30px;
+}
+
+.nav-button {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 13px;
+  text-align: left;
+  color: #e2e4ed;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.nav-button:hover {
+  background: #211d20;
+  border-color: #49372f;
+}
+
+.nav-button.active {
+  background: linear-gradient(110deg, #4b2b27, #2b2028);
+  border-color: #865039;
+  box-shadow: inset 3px 0 var(--orange);
+}
+
+.nav-button.active .nav-icon { color: var(--orange); }
+
+.nav-icon {
+  width: 25px;
+  flex: 0 0 25px;
+  text-align: center;
+  color: #d2d6e0;
+  font-size: 21px;
+}
+
+.sidebar-divider {
+  border-top: 1px solid #39333a;
+  margin: 18px 0 15px;
+}
+
+.section-label {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1.1px;
+  margin: 0 0 10px 4px;
+}
+
+.quick-actions {
+  display: grid;
+  gap: 7px;
+}
+
+.quick-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 43px;
+  padding: 9px 12px;
+  color: #e8e8ef;
+  text-align: left;
+  background: linear-gradient(110deg, #211d20, #171821);
+  border: 1px solid #42383b;
+  border-radius: 11px;
+  font-size: 13px;
+}
+
+.quick-button:hover { border-color: #a36343; }
+
+.quick-icon {
+  width: 23px;
+  flex: 0 0 23px;
+  color: var(--orange);
+  font-size: 19px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.mini-brand-card {
+  padding: 12px;
+  border: 1px solid #594032;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at bottom right, #42251f, #17151a);
+}
+
+.mini-brand-card strong { font-size: 13px; }
+
+.mini-brand-card p {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 5px 0 0;
+}
+
+/* CENTRAL CHAT */
+.main {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 13px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 45% 0%, #171722 0%, transparent 50%),
+    linear-gradient(180deg, #0b1017, #080c12);
+}
+
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+
+.topbar .brandmark {
+  width: 46px;
+  height: 46px;
+  flex-basis: 46px;
+}
+
+.topbar .resona-logo {
+  width: 44px;
+  height: 44px;
+}
+
+.greeting {
+  font-size: 21px;
+  font-weight: 740;
+  letter-spacing: -.4px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.connection {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  color: #e8eaf0;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.connection-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  background: var(--green);
+  border-radius: 50%;
+}
+
+.connection.offline .connection-dot { background: var(--red); }
+
+/* HERO */
+.hero {
+  flex: 0 0 auto;
+  height: clamp(125px, 22vh, 180px);
+  min-height: 125px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  border: 1px solid #35333d;
+  border-radius: 15px;
+  background:
+    radial-gradient(ellipse at 78% 50%, #64321e 0%, transparent 40%),
+    linear-gradient(110deg, #10151d, #17151c);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  right: 7%;
+  top: -70px;
+  width: 220px;
+  height: 220px;
+  border: 1px solid #a55d39;
+  border-radius: 50%;
+  box-shadow: 0 0 0 13px #ff925707;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 65%;
+}
+
+.hero h2 {
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1.18;
+  margin: 0 0 9px;
+  letter-spacing: -.5px;
+}
+
+.hero h2 span { color: var(--orange); }
+
+.hero p {
+  margin: 0;
+  max-width: 360px;
+  color: #d1d5e0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.robot {
+  position: absolute;
+  z-index: 1;
+  width: clamp(115px, 16vw, 175px);
+  max-height: 95%;
+  right: 4%;
+  bottom: -8px;
+  filter: drop-shadow(0 8px 20px #0008);
+}
+
+/* CHAT HISTORY */
+.chat-area {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2px 3px 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #414b59 transparent;
+}
+
+.welcome {
+  flex: 0 0 auto;
+  padding: 14px 16px;
+  border: 1px dashed #394453;
+  border-radius: 14px;
+  background: #0f151e;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.welcome strong {
+  display: block;
+  color: var(--text);
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  max-width: 88%;
+  flex: 0 0 auto;
+}
+
+.message.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--orange);
+  font-weight: 750;
+  font-size: 14px;
+  border: 1px solid #65402f;
+  background: #281d1b;
+}
+
+.message.user .avatar {
+  color: #e5eaff;
+  background: #27334a;
+  border-color: #435775;
+  font-size: 10px;
+}
+
+.bubble {
+  min-width: 0;
+  padding: 11px 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  background: linear-gradient(135deg, #18202c, #111720);
+  border: 1px solid #354152;
+  border-radius: 13px;
+}
+
+.message.user .bubble {
+  background: linear-gradient(135deg, #25364e, #1b2639);
+}
+
+.message-time {
+  display: block;
+  text-align: right;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+/* REFUND AND UNDO CARDS */
+.refund-card, .undo-card {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 12px;
+  border-radius: 13px;
+}
+
+.refund-card {
+  border: 1px solid #286c53;
+  background: linear-gradient(120deg, #102923, #0d1d20);
+}
+
+.success-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #08241a;
+  font-weight: 900;
+}
+
+.refund-card h3 {
+  color: #8af0bf;
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.refund-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.action-id {
+  margin-top: 7px;
+  color: #a4e9e2;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.undo-card {
+  align-items: center;
+  border: 1px solid #925034;
+  background: linear-gradient(100deg, #261c1c, #211b20);
+}
+
+.undo-symbol {
+  color: var(--orange);
+  font-size: 25px;
+}
+
+.undo-copy { flex: 1; min-width: 0; }
+
+.undo-copy strong { font-size: 13px; }
+
+.undo-copy span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.orange-button {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: linear-gradient(110deg, #ffb16b, #ff8550);
+  color: #21140e;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.orange-button:disabled {
+  cursor: default;
+  opacity: .6;
+}
+
+/* MESSAGE COMPOSER STAYS VISIBLE */
+.composer {
+  flex: 0 0 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 7px 5px 12px;
+  margin-top: 7px;
+  border: 1px solid #35404e;
+  border-radius: 25px;
+  background: #111721;
+  box-shadow: 0 -8px 25px #080c1280;
+}
+
+.composer input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  padding: 9px 4px;
+  border: 0;
+  outline: 0;
+  color: white;
+  background: transparent;
+  font-size: 14px;
+}
+
+.composer input::placeholder { color: #aab3c4; }
+
+.icon-button {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #e5e8f0;
+  font-size: 19px;
+}
+
+.icon-button.send {
+  background: var(--orange);
+  color: #21150e;
+}
+
+/* RIGHT INFORMATION PANELS */
+.rightbar {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 15px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #0b1017;
+  border-left: 1px solid var(--border);
+}
+
+.panel {
+  flex: 0 0 auto;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: linear-gradient(145deg, #151c26, #10151d);
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #303946;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.panel-icon {
+  color: var(--orange);
+  font-size: 21px;
+}
+
+.panel-link {
+  margin-left: auto;
+  color: var(--orange);
+  background: transparent;
+  border: 0;
+  font-size: 11px;
+}
+
+.product-summary {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 12px;
+}
+
+.product-icon {
+  width: 49px;
+  height: 49px;
+  flex: 0 0 49px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #dedbd6;
+  color: #111721;
+  font-size: 23px;
+}
+
+.product-summary strong { font-size: 13px; }
+
+.product-summary p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.detail-list {
+  display: grid;
+  gap: 9px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: minmax(70px, .8fr) minmax(0, 1.2fr);
+  gap: 8px;
+  align-items: start;
+  font-size: 12px;
+}
+
+.detail-label { color: var(--muted); }
+.detail-value { overflow-wrap: anywhere; }
+
+.pill {
+  display: inline-block;
+  padding: 5px 9px;
+  border: 1px solid #286c53;
+  border-radius: 20px;
+  color: #70ebbd;
+  background: #12362d;
+  font-size: 11px;
+}
+
+.pill.neutral {
+  color: #cbd5e1;
+  border-color: #465264;
+  background: #202936;
+}
+
+.pill.danger {
+  color: #ffb4b4;
+  border-color: #773e45;
+  background: #351c24;
+}
+
+.trust-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trust-ring {
+  width: 67px;
+  height: 67px;
+  flex: 0 0 67px;
+  display: grid;
+  place-items: center;
+  border: 6px solid #2c8065;
+  border-top-color: var(--green);
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.trust-heading {
+  color: var(--green);
+  font-weight: 750;
+  font-size: 14px;
+}
+
+.trust-description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+
+.related-action {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border: 0;
+  color: #e3e7f0;
+  background: transparent;
+  text-align: left;
+  font-size: 12px;
+}
+
+.related-action span:last-child { color: var(--orange); }
+
+.support-banner {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px;
+  border: 1px solid #75452f;
+  border-radius: 13px;
+  background: linear-gradient(110deg, #211a1b, #30201e);
+}
+
+.support-banner strong {
+  color: var(--orange);
+  font-size: 13px;
+}
+
+.support-banner p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: none;
+  max-width: min(90vw, 480px);
+  padding: 12px 17px;
+  color: white;
+  background: #202733;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 10px 35px #0008;
+}
+
+.toast.show { display: block; }
+
+/* FIT SHORT LAPTOP SCREENS */
+@media (max-height: 800px) {
+  .sidebar { padding-top: 12px; padding-bottom: 10px; }
+  .nav { margin-top: 14px; gap: 3px; }
+  .nav-button { min-height: 37px; padding: 6px 10px; }
+  .sidebar-divider { margin: 10px 0; }
+  .quick-actions { gap: 5px; }
+  .quick-button { min-height: 35px; padding: 6px 9px; }
+  .main { padding: 9px 12px 10px; }
+  .topbar { margin-bottom: 7px; }
+  .hero { height: 130px; min-height: 115px; margin-bottom: 8px; padding: 14px; }
+  .hero h2 { font-size: 22px; margin-bottom: 7px; }
+  .hero p { font-size: 12px; }
+  .welcome { padding: 11px 13px; }
+  .composer { margin-top: 6px; min-height: 46px; }
+  .rightbar { padding-top: 9px; padding-bottom: 9px; gap: 8px; }
+  .panel { padding: 10px; }
+  .panel-title { margin-bottom: 7px; padding-bottom: 7px; }
+  .detail-list { gap: 7px; }
+}
+
+@media (max-width: 1100px) {
+  .app { grid-template-columns: 205px minmax(0, 1fr) 265px; }
+  .sidebar { padding-left: 11px; padding-right: 11px; }
+  .brand-name { font-size: 23px; }
+  .resona-logo { width: 48px; height: 48px; }
+  .hero-copy { max-width: 70%; }
+}
+
+@media (max-width: 850px) {
+  body { overflow: auto; }
+  .app {
+    height: 100dvh;
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+  .sidebar { padding: 12px 8px; }
+  .brand { justify-content: center; }
+  .brand > div:last-child,
+  .nav-button span:not(.nav-icon),
+  .section-label,
+  .quick-button:not(:hover),
+  .sidebar-divider,
+  .mini-brand-card { display: none; }
+  .nav { margin-top: 20px; }
+  .nav-button { justify-content: center; padding: 9px 4px; }
+  .nav-icon { width: auto; flex-basis: auto; }
+  .quick-actions { margin-top: 12px; }
+  .quick-button { justify-content: center; font-size: 0; padding: 8px; }
+  .quick-icon { font-size: 19px; }
+  .rightbar { display: none; }
+  .main { padding: 12px; }
+}
+
+@media (max-width: 520px) {
+  .greeting { font-size: 17px; }
+  .subtitle { font-size: 11px; }
+  .topbar .brandmark { display: none; }
+  .hero { min-height: 115px; height: 120px; }
+  .hero-copy { max-width: 75%; }
+  .hero h2 { font-size: 19px; }
+  .hero p { font-size: 11px; }
+  .robot { width: 105px; right: 0; }
+  .message { max-width: 96%; }
+  .undo-card { flex-wrap: wrap; }
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.new-conversation-btn {
+  padding: 10px 14px;
+  color: #f2d58a;
+  background: #211d20;
+  border: 1px solid #665039;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.new-conversation-btn:hover {
+  background: #30272a;
+  border-color: #c99a35;
+}
+
+@media (max-width: 600px) {
+  .topbar-actions {
+    gap: 8px;
+  }
+
+  .new-conversation-btn {
+    padding: 8px;
+    font-size: 11px;
+  }
+}
+
+#cameraBtn {
+  display: grid;
+  place-items: center;
+  color: var(--orange);
+}
+
+#cameraBtn:hover { background: #211d20; }
+
+/* RESONA VISION (EVIDENCE PAGE) */
+.vision-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(4, 7, 12, .78);
+  backdrop-filter: blur(4px);
+}
+
+.vision-overlay.show { display: flex; }
+
+.vision-modal {
+  position: relative;
+  width: min(100%, 640px);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 26px;
+  border: 1px solid #2f3a49;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #151c27, #0f141c);
+  box-shadow: 0 25px 70px #000a;
+}
+
+.vision-eyebrow {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+.vision-modal h2 {
+  margin: 6px 40px 6px 0;
+  font-size: 25px;
+  letter-spacing: -.4px;
+}
+
+.vision-sub {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.vision-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #3a4658;
+  border-radius: 50%;
+  color: #e5e8f0;
+  background: #1b2330;
+  font-size: 17px;
+}
+
+.vision-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #2f3a49;
+  border-radius: 15px;
+  background: #0f151e;
+}
+
+.vision-btn {
+  padding: 10px 16px;
+  color: #e5e8f0;
+  border: 1px solid #3a4658;
+  border-radius: 11px;
+  background: #1a2330;
+  font-weight: 650;
+  font-size: 13px;
+}
+
+.vision-btn:hover { border-color: var(--orange); }
+
+.vision-btn.primary {
+  color: #21140e;
+  border-color: transparent;
+  background: linear-gradient(110deg, #ffb16b, #ff8550);
+}
+
+.vision-preview {
+  display: none;
+  position: relative;
+  margin-bottom: 14px;
+  overflow: hidden;
+  border: 1px solid #2f3a49;
+  border-radius: 15px;
+  background: #05080c;
+}
+
+.vision-preview.show { display: block; }
+
+.vision-preview video,
+.vision-preview img {
+  display: block;
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  background: #05080c;
+}
+
+.shutter-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  background: rgba(255, 146, 87, .9);
+  box-shadow: 0 4px 16px #0009;
+}
+
+.shutter-btn:hover { background: var(--orange); }
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+}
+
+.vision-field { display: flex; flex-direction: column; gap: 6px; }
+.vision-field.full { grid-column: 1 / -1; }
+.vision-field label { font-size: 13px; color: #dfe3ec; }
+
+.vision-field input,
+.vision-field select,
+.vision-field textarea {
+  width: 100%;
+  padding: 12px 13px;
+  color: var(--text);
+  border: 1px solid #2f3a49;
+  border-radius: 11px;
+  outline: none;
+  background: #090e15;
+  font-size: 14px;
+}
+
+.vision-field textarea { min-height: 90px; resize: vertical; }
+
+.vision-field input:focus,
+.vision-field select:focus,
+.vision-field textarea:focus { border-color: var(--orange); }
+
+.vision-field input::placeholder,
+.vision-field textarea::placeholder { color: #6b7688; }
+
+.vision-hint {
+  margin-top: 12px;
+  padding: 12px 13px;
+  color: #dfe3ec;
+  font-size: 13px;
+  border: 1px solid #2f3a49;
+  border-radius: 11px;
+  background: #0f151e;
+}
+
+.vision-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.vision-footer .vision-btn { padding: 12px 20px; }
+.vision-footer .vision-btn:disabled { opacity: .6; cursor: default; }
+
+@media (max-width: 560px) {
+  .vision-grid { grid-template-columns: 1fr; }
+  .vision-modal { padding: 20px 16px; }
+  .vision-footer { flex-direction: column; align-items: stretch; }
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brandmark" aria-label="Resona logo">
+        <svg class="resona-logo" viewBox="0 0 216 180"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Resona">
+          <defs>
+            <linearGradient id="resonaGoldSidebar" x1="20" y1="5" x2="190" y2="165" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFF0B0"/>
+              <stop offset="40%" stop-color="#E8C76A"/>
+              <stop offset="75%" stop-color="#C99A35"/>
+              <stop offset="100%" stop-color="#F5D982"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 20 H113 C148 20 169 37 169 62 C169 87 147 103 116 103 H77 C52 103 35 119 35 144 V164 C55 149 68 133 68 113 C68 101 76 96 86 101 C105 112 125 142 143 155 C155 164 172 166 190 164 C165 153 147 130 126 111 C116 102 105 96 92 91 H112 C154 91 187 75 187 48 C187 20 160 5 119 5 H5 C9 12 14 17 20 20Z"
+                fill="url(#resonaGoldSidebar)"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-name">Resona</h1>
+        <div class="brand-tagline">Smarter Support. Real Solutions.</div>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="Main navigation">
+      <button class="nav-button active" data-view="Chat"><span class="nav-icon">◯</span><span>Chat</span></button>
+      <button class="nav-button" data-view="Orders"><span class="nav-icon">⬡</span><span>Orders</span></button>
+      <button class="nav-button" data-view="Refunds"><span class="nav-icon">⟳</span><span>Refunds</span></button>
+      <button class="nav-button" data-view="Account"><span class="nav-icon">♙</span><span>Account</span></button>
+      <button class="nav-button" data-view="Settings"><span class="nav-icon">⚙</span><span>Settings</span></button>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+    <p class="section-label">QUICK ACTIONS</p>
+
+    <div class="quick-actions">
+      <button class="quick-button" data-prompt="Can you check my order status?"><span class="quick-icon">⌕</span>Check Order Status</button>
+      <button class="quick-button" data-prompt="I want to request a refund"><span class="quick-icon">⟳</span>Request Refund</button>
+      <button class="quick-button" data-prompt="Can you check my shipment?"><span class="quick-icon">♧</span>Track Shipment</button>
+      <button class="quick-button" data-prompt="I need help with an issue"><span class="quick-icon">ⓘ</span>Get Help</button>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="mini-brand-card">
+        <strong>Resona Support</strong>
+        <p>Your trusted support assistant for a smoother experience.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CENTRAL CHAT -->
+  <main class="main">
+    <header class="topbar">
+      <div class="brandmark" aria-hidden="true">
+        <svg class="resona-logo" viewBox="0 0 216 180"
+             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Resona">
+          <defs>
+            <linearGradient id="resonaGoldTop" x1="20" y1="5" x2="190" y2="165" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#FFF0B0"/>
+              <stop offset="40%" stop-color="#E8C76A"/>
+              <stop offset="75%" stop-color="#C99A35"/>
+              <stop offset="100%" stop-color="#F5D982"/>
+            </linearGradient>
+          </defs>
+          <path d="M20 20 H113 C148 20 169 37 169 62 C169 87 147 103 116 103 H77 C52 103 35 119 35 144 V164 C55 149 68 133 68 113 C68 101 76 96 86 101 C105 112 125 142 143 155 C155 164 172 166 190 164 C165 153 147 130 126 111 C116 102 105 96 92 91 H112 C154 91 187 75 187 48 C187 20 160 5 119 5 H5 C9 12 14 17 20 20Z"
+                fill="url(#resonaGoldTop)"/>
+        </svg>
+      </div>
+
+      <div>
+        <div class="greeting">Welcome to Resona</div>
+        <div class="subtitle">Your AI support assistant. How can I help today?</div>
+      </div>
+
+      
+<div class="topbar-actions">
+  <button type="button" id="newConversationBtn" class="new-conversation-btn">
+    + New Conversation
+  </button>
+
+  <div class="connection" id="connection">
+    <span class="connection-dot"></span>Online
+  </div>
+</div>
+
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <h2>Real support.<br><span>Real resolutions.</span></h2>
+        <p>I'm here to help with your orders, refunds, and more — anytime.</p>
+      </div>
+
+      <!-- Robot illustration -->
+      <svg class="robot" viewBox="0 0 240 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="robotShell" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f2d5bf"/>
+            <stop offset="100%" stop-color="#a77b64"/>
+          </linearGradient>
+          <linearGradient id="robotBody" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#d7b39e"/>
+            <stop offset="100%" stop-color="#8d675a"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="120" cy="230" rx="73" ry="12" fill="#000" opacity=".2"/>
+        <path d="M68 170 Q120 150 172 170 L190 250 H50Z" fill="url(#robotBody)"/>
+        <path d="M96 169 L120 192 L144 169 L136 218 H104Z" fill="#ff9257"/>
+        <rect x="49" y="55" width="142" height="118" rx="48" fill="url(#robotShell)" stroke="#ff9257" stroke-width="3"/>
+        <rect x="59" y="65" width="122" height="98" rx="39" fill="#0a1018" stroke="#7d6257" stroke-width="3"/>
+        <rect x="31" y="91" width="25" height="53" rx="12" fill="#d7b39e" stroke="#ff9257" stroke-width="2"/>
+        <rect x="184" y="91" width="25" height="53" rx="12" fill="#d7b39e" stroke="#ff9257" stroke-width="2"/>
+        <path d="M78 105 Q91 86 104 105" fill="none" stroke="#ffb078" stroke-width="5" stroke-linecap="round"/>
+        <path d="M136 105 Q149 86 162 105" fill="none" stroke="#ffb078" stroke-width="5" stroke-linecap="round"/>
+        <path d="M94 128 Q120 149 146 128" fill="none" stroke="#ff9257" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="120" cy="43" r="7" fill="#ff9257"/>
+        <path d="M120 37 V25" stroke="#ffb078" stroke-width="3"/>
+        <circle cx="120" cy="22" r="4" fill="#ffb078"/>
+        <path d="M75 175 L59 196 M165 175 L181 196" stroke="#b17a59" stroke-width="9" stroke-linecap="round"/>
+        <circle cx="59" cy="199" r="12" fill="url(#robotShell)"/>
+        <circle cx="181" cy="199" r="12" fill="url(#robotShell)"/>
+      </svg>
+    </section>
+
+    <section class="chat-area" id="chatArea" aria-live="polite">
+      <div class="welcome" id="welcome">
+        <strong>Welcome to Resona Support</strong>
+        Ask about an order, request a refund, or tell me what you need help with.
+      </div>
+    </section>
+
+    <form class="composer" id="chatForm">
+      <button type="button" class="icon-button" id="cameraBtn" aria-label="Share a photo or issue evidence">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 8h3l1.6-2.4h6.8L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>
+          <circle cx="12" cy="13.5" r="3.6"/>
+        </svg>
+      </button>
+      <button type="button" class="icon-button" id="attachBtn" aria-label="Attachments">＋</button>
+      <input id="messageInput" type="text" placeholder="Ask Resona anything..." autocomplete="off" required>
+      <button type="submit" class="icon-button send" aria-label="Send message">➤</button>
+    </form>
+  </main>
+
+  <!-- RIGHT-SIDE INFORMATION -->
+  <aside class="rightbar" aria-label="Order and action information">
+    <section class="panel">
+      <div class="panel-title">
+        <span class="panel-icon">⬡</span><span>Order Details</span>
+        <button class="panel-link" data-prompt="Can you check my order status?">Check order</button>
+      </div>
+
+      <div class="product-summary">
+        <div class="product-icon">▣</div>
+        <div>
+          <strong id="itemName">Order information</strong>
+          <p id="itemDescription">Details appear when the backend returns order information.</p>
+        </div>
+      </div>
+
+      <div class="detail-list">
+        <div class="detail-row"><span class="detail-label">Order ID</span><span class="detail-value" id="orderIdValue">Not checked</span></div>
+        <div class="detail-row"><span class="detail-label">Status</span><span class="detail-value"><span class="pill neutral" id="orderStatusValue">Awaiting request</span></span></div>
+        <div class="detail-row"><span class="detail-label">Delivery</span><span class="detail-value" id="deliveryValue">—</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title"><span class="panel-icon">⟳</span><span>Refund Details</span><span class="pill" style="margin-left:auto">Protected</span></div>
+      <div class="detail-list">
+        <div class="detail-row"><span class="detail-label">Item</span><span class="detail-value" id="refundItemValue">—</span></div>
+        <div class="detail-row"><span class="detail-label">Amount</span><span class="detail-value" id="refundAmountValue">—</span></div>
+        <div class="detail-row"><span class="detail-label">Decision</span><span class="detail-value" id="refundDecisionValue">No action yet</span></div>
+        <div class="detail-row"><span class="detail-label">Action ID</span><span class="detail-value" id="actionIdValue">—</span></div>
+        <div class="detail-row"><span class="detail-label">Case ID</span><span class="detail-value" id="caseIdValue">—</span></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title"><span class="panel-icon">♢</span><span>Trust &amp; Safety</span></div>
+      <div class="trust-row">
+        <div class="trust-ring" id="trustRing">—</div>
+        <div>
+          <div class="trust-heading" id="trustHeading">Trust-gated actions</div>
+          <div class="trust-description" id="trustDescription">Resona checks eligibility, verifies changes, and escalates cases when needed.</div>
+          <div class="trust-description" id="trustCategory"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title"><span class="panel-icon">✦</span><span>Related Actions</span></div>
+      <button class="related-action" data-prompt="Can you check my order history?"><span>Check order history</span><span>›</span></button>
+      <button class="related-action" data-prompt="I want to contact human support"><span>Contact human support</span><span>›</span></button>
+      <button class="related-action" data-prompt="I need help with an issue"><span>Report an issue</span><span>›</span></button>
+    </section>
+
+    <section class="support-banner">
+      <span class="panel-icon">♢</span>
+      <div><strong>We're here for you</strong><p>Responsible support, with verification.</p></div>
+    </section>
+  </aside>
+</div>
+
+<!-- RESONA VISION: EVIDENCE PAGE -->
+<div class="vision-overlay" id="visionOverlay">
+  <div class="vision-modal" role="dialog" aria-modal="true" aria-labelledby="visionTitle">
+    <div class="vision-eyebrow">RESONA VISION</div>
+    <h2 id="visionTitle">Tell us what went wrong</h2>
+    <p class="vision-sub">Add a photo and a few details so Resona can review your request. This works for damaged items, wrong color or size, defects, or any other reason.</p>
+    <button type="button" class="vision-close" id="visionClose" aria-label="Close">✕</button>
+
+    <div class="vision-toolbar">
+      <button type="button" class="vision-btn primary" id="openCameraBtn">◉ Open camera</button>
+      <button type="button" class="vision-btn" id="choosePhotoBtn">Choose photo</button>
+      <input type="file" id="photoFile" accept="image/*" hidden>
+      <input type="file" id="photoCapture" accept="image/*" capture="environment" hidden>
+    </div>
+
+    <div class="vision-preview" id="visionPreview">
+      <video id="cameraVideo" autoplay playsinline muted style="display:none"></video>
+      <button type="button" class="shutter-btn" id="shutterBtn" aria-label="Take photo" style="display:none"></button>
+      <img id="photoPreview" alt="Selected photo" style="display:none">
+    </div>
+
+    <div class="vision-grid">
+      <div class="vision-field">
+        <label for="visionOrderId">Order ID</label>
+        <input id="visionOrderId" type="text" placeholder="e.g. A1001" autocomplete="off">
+      </div>
+      <div class="vision-field">
+        <label for="visionItemId">Item ID</label>
+        <input id="visionItemId" type="text" placeholder="e.g. I001" autocomplete="off">
+      </div>
+      <div class="vision-field">
+        <label for="visionProductId">Product ID</label>
+        <input id="visionProductId" type="text" placeholder="e.g. P1" autocomplete="off">
+      </div>
+      <div class="vision-field">
+        <label for="visionReason">Reason</label>
+        <select id="visionReason">
+          <option value="Damaged item">Damaged item</option>
+          <option value="Wrong color">Wrong color</option>
+          <option value="Wrong size">Wrong size</option>
+          <option value="Defective or not working">Defective or not working</option>
+          <option value="Not as described">Not as described</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="vision-field full">
+        <label for="visionDescription">What is the issue?</label>
+        <textarea id="visionDescription" placeholder="Briefly describe the problem (e.g. received a red one instead of blue)"></textarea>
+      </div>
+    </div>
+
+    <div class="vision-hint" id="visionHint">Use a clear, well-lit photo. Maximum image size: 4 MB.</div>
+
+    <div class="vision-footer">
+      <span>Uncertain results may require human review.</span>
+      <button type="button" class="vision-btn primary" id="submitEvidenceBtn">Submit evidence</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* Existing API Gateway endpoints */
+const API_URL = "https://9jxktpvy63.execute-api.us-east-1.amazonaws.com/chat";
+const UNDO_API_URL = "https://9jxktpvy63.execute-api.us-east-1.amazonaws.com/undo";
+
+const chatArea = document.getElementById("chatArea");
+const input = document.getElementById("messageInput");
+const form = document.getElementById("chatForm");3
+const connection = document.getElementById("connection");
+
+let sessionId = createSessionId();
+let busy = false;
+
+function createSessionId() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return window.crypto.randomUUID();
+  }
+  return "resona-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+}
+
+
+document.getElementById("newConversationBtn").addEventListener("click", () => {
+  if (busy) {
+    showToast("Please wait for the current request to finish.");
+    return;
+  }
+
+  sessionId = createSessionId();
+
+  chatArea.innerHTML = "";
+  document.getElementById("welcome")?.remove();
+
+  addMessage("Hi! I'm Resona. How can I help you today?", "bot");
+
+  input.value = "";
+  input.disabled = false;
+  form.querySelector('button[type="submit"]').disabled = false;
+
+  [
+    "refundItemValue",
+    "refundAmountValue",
+    "refundDecisionValue",
+    "actionIdValue",
+    "caseIdValue"
+  ].forEach(id => setText(id, "—"));
+
+  showToast("New conversation started.");
+  input.focus();
+});
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove("show"), 3500);
+}
+
+function scrollChatToBottom() {
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+function setConnection(online, message) {
+  connection.classList.toggle("offline", !online);
+  connection.replaceChildren();
+
+  const dot = document.createElement("span");
+  dot.className = "connection-dot";
+  connection.append(dot, document.createTextNode(message));
+}
+
+function addMessage(message, sender = "bot") {
+  const row = document.createElement("div");
+  row.className = "message " + sender;
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = sender === "user" ? "YOU" : "R";
+
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = message;
+
+  const time = document.createElement("span");
+  time.className = "message-time";
+  time.textContent = new Date().toLocaleTimeString([], {
+    hour: "2-digit", minute: "2-digit"
+  });
+
+  bubble.appendChild(time);
+  row.append(avatar, bubble);
+  chatArea.appendChild(row);
+  scrollChatToBottom();
+}
+
+function setText(id, value, fallback = "—") {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.textContent =
+    value === undefined || value === null || value === ""
+      ? fallback
+      : String(value);
+}
+
+function formatAmount(value) {
+  if (value === undefined || value === null || value === "") return "—";
+  const amount = Number(value);
+  return Number.isFinite(amount)
+    ? "₹" + amount.toLocaleString("en-IN")
+    : String(value);
+}
+
+function setPill(id, value, kind = "neutral") {
+  const element = document.getElementById(id);
+  if (!element || value === undefined || value === null || value === "") return;
+  element.textContent = String(value);
+  element.className = "pill " + kind;
+}
+
+function updateOrderPanelFromReply(reply) {
+  // Match replies such as: "Order 1122 is currently: Shipped. Expected delivery: 4 days."
+  const match = reply.match(
+    /Order\s+([A-Za-z0-9-]+)\s+is currently:\s*([^.]+)\.\s*Expected delivery:\s*([^.]+)\.?/i
+  );
+
+  if (!match) return;
+
+  const [, orderNumber, status, delivery] = match;
+
+  setText("orderIdValue", orderNumber);
+  setText("deliveryValue", delivery.trim());
+
+  const statusElement = document.getElementById("orderStatusValue");
+  statusElement.textContent = status.trim();
+
+  const normalizedStatus = status.trim().toLowerCase();
+  statusElement.className = "pill";
+
+  if (/cancel|failed|error|returned/.test(normalizedStatus)) {
+    statusElement.classList.add("danger");
+  } else if (!/shipped|delivered|active|complete/.test(normalizedStatus)) {
+    statusElement.classList.add("neutral");
+  }
+}
+
+function updatePanels(data) {
+  const order = data?.order ?? data?.Order;
+  const item = data?.item ?? data?.Item;
+  const refund = data?.refund ?? data?.Refund;
+  const trust = data?.trust ?? data?.Trust;
+
+  if (order && typeof order === "object") {
+    setText("orderIdValue", order.orderNumber ?? order.OrderNumber ?? order.orderId ?? order.OrderId);
+    setText("deliveryValue", order.expectedDelivery ?? order.ExpectedDelivery);
+
+    const status = order.status ?? order.Status;
+    if (status) {
+      let kind = "neutral";
+      if (/delivered|shipped|active|complete/i.test(String(status))) kind = "";
+      if (/cancel|failed|error/i.test(String(status))) kind = "danger";
+      setPill("orderStatusValue", status, kind);
+    }
+
+    const items = order.items ?? order.Items;
+    if (Array.isArray(items) && items.length === 1) {
+      setText("itemName", items[0].name ?? items[0].Name, "Order information");
+    }
+  }
+
+  if (item && typeof item === "object") {
+    setText("itemName", item.name ?? item.Name, "Order information");
+    setText("itemDescription", item.description ?? "Item details returned by the backend.");
+    setText("refundItemValue", item.name ?? item.Name ?? item.itemId ?? item.ItemId);
+    setText("refundAmountValue", formatAmount(item.refundAmount ?? item.RefundAmount));
+  }
+
+  if (refund && typeof refund === "object") {
+    setText("refundItemValue", refund.itemName ?? refund.itemId ?? refund.ItemId,
+      document.getElementById("refundItemValue").textContent);
+
+    const amount = refund.amount ?? refund.refundAmount ?? refund.RefundAmount;
+    if (amount !== undefined && amount !== null) setText("refundAmountValue", formatAmount(amount));
+
+    setText("refundDecisionValue", refund.decision ?? refund.status ?? refund.Status,
+      document.getElementById("refundDecisionValue").textContent);
+
+    setText("actionIdValue", refund.actionId ?? refund.ActionId,
+      document.getElementById("actionIdValue").textContent);
+    setText("caseIdValue", refund.caseId ?? refund.CaseId,
+      document.getElementById("caseIdValue").textContent);
+  }
+
+  if (trust && typeof trust === "object") {
+    const score = trust.score ?? trust.trustScore;
+    if (score !== undefined && score !== null && score !== "") {
+      const numericScore = Number(score);
+      if (Number.isFinite(numericScore)) {
+        document.getElementById("trustRing").textContent = numericScore + "/100";
+        document.getElementById("trustRing").style.borderTopColor =
+          numericScore >= 80 ? "var(--green)" :
+          numericScore >= 50 ? "var(--orange)" : "var(--red)";
+
+        document.getElementById("trustHeading").textContent =
+          numericScore >= 80 ? "High trust" :
+          numericScore >= 50 ? "Medium trust" : "Low trust";
+
+        document.getElementById("trustDescription").textContent =
+          numericScore >= 80
+            ? "Eligible actions still require verification."
+            : numericScore >= 50
+              ? "Some actions may require additional checks."
+              : "Actions may require human review.";
+      }
+    }
+    setText("trustCategory", trust.category ? "Category: " + trust.category : "");
+  }
+}
+
+function getActionId(data, reply) {
+  const structured =
+    data?.refund?.actionId ??
+    data?.refund?.ActionId ??
+    data?.actionId ??
+    data?.ActionId;
+
+  if (structured) return String(structured);
+
+  const match = String(reply).match(
+    /Action\s*ID\s*:\s*([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/i
+  );
+
+  return match ? match[1] : null;
+}
+
+function isVerifiedRefund(data, reply) {
+  const decision = String(
+    data?.refund?.decision ??
+    data?.refund?.status ??
+    data?.refund?.Status ??
+    ""
+  ).toUpperCase();
+
+  if (decision === "VERIFIED") return true;
+
+  return /\brefund\b/i.test(reply) &&
+         /\bsuccessfully\b/i.test(reply) &&
+         /\bverified\b/i.test(reply) &&
+         /Action\s*ID\s*:/i.test(reply);
+}
+
+function addRefundCard(reply, actionId) {
+  const card = document.createElement("div");
+  card.className = "refund-card";
+
+  const icon = document.createElement("div");
+  icon.className = "success-icon";
+  icon.textContent = "✓";
+
+  const body = document.createElement("div");
+  body.style.minWidth = "0";
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Refund Successful & Verified";
+
+  const description = document.createElement("p");
+  description.textContent = reply;
+
+  const id = document.createElement("div");
+  id.className = "action-id";
+  id.textContent = "Action ID: " + actionId;
+
+  body.append(heading, description, id);
+  card.append(icon, body);
+  chatArea.appendChild(card);
+  scrollChatToBottom();
+}
+
+function addUndoCard(actionId) {
+  const card = document.createElement("div");
+  card.className = "undo-card";
+
+  const icon = document.createElement("div");
+  icon.className = "undo-symbol";
+  icon.textContent = "↶";
+
+  const copy = document.createElement("div");
+  copy.className = "undo-copy";
+
+  const heading = document.createElement("strong");
+  heading.textContent = "Need to undo this refund?";
+
+  const description = document.createElement("span");
+  description.textContent = "Resona will attempt to restore the previous state and verify the change.";
+
+  copy.append(heading, description);
+
+  const button = document.createElement("button");
+  button.className = "orange-button";
+  button.textContent = "Undo refund";
+  button.addEventListener("click", () => undoRefund(actionId, button));
+
+  card.append(icon, copy, button);
+  chatArea.appendChild(card);
+  scrollChatToBottom();
+}
+
+async function undoRefund(actionId, button) {
+  const approved = window.confirm(
+    "Undo this refund? Resona will attempt to restore the previous state and verify the change."
+  );
+  if (!approved) return;
+
+  button.disabled = true;
+  button.textContent = "Undoing…";
+
+  try {
+    const response = await fetch(UNDO_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ActionId: actionId })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || result.success !== true) {
+      throw new Error(result.message || "The undo action could not be verified.");
+    }
+
+    button.textContent = "Refund undone";
+    setText("refundDecisionValue", "Undone and verified");
+    addMessage(result.message || "The undo action succeeded and was verified.", "bot");
+    showToast("Undo action completed.");
+  } catch (error) {
+    button.disabled = false;
+    button.textContent = "Undo refund";
+    showToast(error.message || "Undo request failed.");
+  }
+}
+
+function showTypingIndicator() {
+  const row = document.createElement("div");
+  row.className = "message bot";
+  row.id = "typingIndicator";
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = "R";
+
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = "Resona is thinking…";
+
+  row.append(avatar, bubble);
+  chatArea.appendChild(row);
+  scrollChatToBottom();
+  return row;
+}
+
+async function sendMessage(message) {
+  if (!message || busy) return;
+  if (await handleClaimFlow(message)) return;
+
+  busy = true;
+  document.getElementById("welcome")?.remove();
+  addMessage(message, "user");
+
+  input.value = "";
+  input.disabled = true;
+
+  const sendButton = form.querySelector('button[type="submit"]');
+  sendButton.disabled = true;
+
+  const typing = showTypingIndicator();
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, sessionId })
+    });
+
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      throw new Error("The support API returned an invalid response.");
+    }
+
+    if (!response.ok) {
+      throw new Error(data.message || data.error || "The support request failed.");
+    }
+
+    const reply = data.reply ?? data.message ?? "I couldn't find a response.";
+    typing.remove();
+    updatePanels(data);
+    updateOrderPanelFromReply(reply);
+
+    const actionId = getActionId(data, reply);
+
+    if (actionId && isVerifiedRefund(data, reply)) {
+      addRefundCard(reply, actionId);
+      addUndoCard(actionId);
+    } else {
+      addMessage(reply, "bot");
+    }
+
+    setConnection(true, "Online");
+  } catch (error) {
+    typing.remove();
+    addMessage("I couldn't connect to Resona. Please check the connection and try again.", "bot");
+    setConnection(false, "Service issue");
+    showToast(error.message || "Connection error.");
+  } finally {
+    busy = false;
+    input.disabled = false;
+    sendButton.disabled = false;
+    input.focus();
+  }
+}
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  sendMessage(input.value.trim());
+});
+
+document.querySelectorAll("[data-prompt]").forEach(button => {
+  button.addEventListener("click", () => {
+    console.log("Quick button clicked:", button.dataset.prompt);
+    console.log("Busy state:", busy);
+    sendMessage(button.dataset.prompt);
+  });
+});
+
+document.querySelectorAll("[data-view]").forEach(button => {
+  button.addEventListener("click", () => {
+    const view = button.dataset.view;
+
+    if (view !== "Chat") {
+      showToast(view + " is not connected to a separate page yet. Use the chat for supported actions.");
+      return;
+    }
+
+    document.querySelectorAll("[data-view]").forEach(item => {
+      item.classList.toggle("active", item === button);
+    });
+
+    input.focus();
+  });
+});
+
+document.getElementById("attachBtn").addEventListener("click", () => {
+  showToast("Attachments are not enabled in this prototype.");
+});
+
+/* ===== RESONA VISION (evidence page) ===== */
+/* Put your image-assessment endpoint here. Leave as-is to use the chat endpoint. */
+const VISION_API_URL = API_URL;
+const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
+
+const visionOverlay = document.getElementById("visionOverlay");
+const visionPreview = document.getElementById("visionPreview");
+const cameraVideo = document.getElementById("cameraVideo");
+const shutterBtn = document.getElementById("shutterBtn");
+const photoPreview = document.getElementById("photoPreview");
+const photoFile = document.getElementById("photoFile");
+const photoCapture = document.getElementById("photoCapture");
+const visionHint = document.getElementById("visionHint");
+const submitEvidenceBtn = document.getElementById("submitEvidenceBtn");
+
+let cameraStream = null;
+let photoDataUrl = null;
+let photoBytes = 0;
+
+function setVisionHint(text, isError) {
+  visionHint.textContent = text;
+  visionHint.style.borderColor = isError ? "#773e45" : "#2f3a49";
+  visionHint.style.color = isError ? "#ffb4b4" : "#dfe3ec";
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(track => track.stop());
+    cameraStream = null;
+  }
+  cameraVideo.srcObject = null;
+  cameraVideo.style.display = "none";
+  shutterBtn.style.display = "none";
+}
+
+function showPhoto(dataUrl, bytes) {
+  photoDataUrl = dataUrl;
+  photoBytes = bytes;
+  photoPreview.src = dataUrl;
+  photoPreview.style.display = "block";
+  visionPreview.classList.add("show");
+  setVisionHint("Photo ready (" + (bytes / 1024 / 1024).toFixed(2) + " MB).", false);
+}
+
+function resetVisionForm() {
+  stopCamera();
+  photoDataUrl = null;
+  photoBytes = 0;
+  photoPreview.removeAttribute("src");
+  photoPreview.style.display = "none";
+  visionPreview.classList.remove("show");
+  photoFile.value = "";
+  photoCapture.value = "";
+  ["visionOrderId", "visionItemId", "visionProductId", "visionDescription"]
+    .forEach(id => { document.getElementById(id).value = ""; });
+  document.getElementById("visionReason").selectedIndex = 0;
+  setVisionHint("Use a clear, well-lit photo. Maximum image size: 4 MB.", false);
+  submitEvidenceBtn.disabled = false;
+  submitEvidenceBtn.textContent = "Submit evidence";
+}
+
+function openVision() {
+  visionOverlay.classList.add("show");
+}
+
+function closeVision() {
+  stopCamera();
+  visionOverlay.classList.remove("show");
+}
+
+function handleImageFile(file) {
+  if (!file) return;
+  if (!file.type.startsWith("image/")) {
+    setVisionHint("Please choose an image file.", true);
+    return;
+  }
+  if (file.size > MAX_IMAGE_BYTES) {
+    setVisionHint("That image is larger than 4 MB. Please choose a smaller one.", true);
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    stopCamera();
+    showPhoto(reader.result, file.size);
+  };
+  reader.readAsDataURL(file);
+}
+
+async function openCamera() {
+  photoDataUrl = null;
+  photoPreview.style.display = "none";
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    photoCapture.click(); // fallback: phone's own camera app
+    return;
+  }
+
+  try {
+    stopCamera();
+    cameraStream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "environment" } },
+      audio: false
+    });
+    cameraVideo.srcObject = cameraStream;
+    cameraVideo.style.display = "block";
+    shutterBtn.style.display = "block";
+    visionPreview.classList.add("show");
+    setVisionHint("Camera is on. Tap the round button to take the photo.", false);
+  } catch (error) {
+    setVisionHint("Could not open the camera. Allow camera access, or use Choose photo.", true);
+  }
+}
+
+function takePhoto() {
+  if (!cameraStream || !cameraVideo.videoWidth) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = cameraVideo.videoWidth;
+  canvas.height = cameraVideo.videoHeight;
+  canvas.getContext("2d").drawImage(cameraVideo, 0, 0);
+
+  let dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+  if (dataUrl.length * 0.75 > MAX_IMAGE_BYTES) {
+    dataUrl = canvas.toDataURL("image/jpeg", 0.6);
+  }
+
+  stopCamera(); // camera turns off by itself after the photo
+  showPhoto(dataUrl, Math.round(dataUrl.length * 0.75));
+}
+
+async function submitEvidence() {
+  const orderId = document.getElementById("visionOrderId").value.trim();
+  const itemId = document.getElementById("visionItemId").value.trim();
+  const productId = document.getElementById("visionProductId").value.trim();
+  const reason = document.getElementById("visionReason").value;
+  const description = document.getElementById("visionDescription").value.trim();
+
+  if (!photoDataUrl) {
+    setVisionHint("Please take or choose a photo first.", true);
+    return;
+  }
+  if (photoBytes > MAX_IMAGE_BYTES) {
+    setVisionHint("The image is larger than 4 MB.", true);
+    return;
+  }
+  if (!orderId || !description) {
+    setVisionHint("Please add the Order ID and describe the issue.", true);
+    return;
+  }
+
+  submitEvidenceBtn.disabled = true;
+  submitEvidenceBtn.textContent = "Submitting…";
+
+  try {
+    const response = await fetch(VISION_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "I want to submit evidence for order " + orderId + ". Reason: " + reason + ". " + description,
+        sessionId,
+        evidence: { orderId, itemId, productId, reason, description, image: photoDataUrl }
+      })
+    });
+
+    let data;
+    try { data = await response.json(); }
+    catch { throw new Error("The server returned an invalid response."); }
+
+    if (!response.ok) throw new Error(data.message || data.error || "Submission failed.");
+
+    closeVision();
+    document.getElementById("welcome")?.remove();
+    addMessage("Submitted a photo for order " + orderId + " (" + reason + ").", "user");
+
+    const reply = data.reply ?? data.message ?? "Your evidence was received.";
+    updatePanels(data);
+    addMessage(reply, "bot");
+    resetVisionForm();
+  } catch (error) {
+    submitEvidenceBtn.disabled = false;
+    submitEvidenceBtn.textContent = "Submit evidence";
+    setVisionHint(error.message || "Could not submit. Please try again.", true);
+  }
+}
+
+document.getElementById("cameraBtn").addEventListener("click", openVision);
+document.getElementById("visionClose").addEventListener("click", closeVision);
+visionOverlay.addEventListener("click", e => { if (e.target === visionOverlay) closeVision(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeVision(); });
+document.getElementById("openCameraBtn").addEventListener("click", openCamera);
+document.getElementById("choosePhotoBtn").addEventListener("click", () => photoFile.click());
+photoFile.addEventListener("change", () => handleImageFile(photoFile.files[0]));
+photoCapture.addEventListener("change", () => handleImageFile(photoCapture.files[0]));
+shutterBtn.addEventListener("click", takePhoto);
+submitEvidenceBtn.addEventListener("click", submitEvidence);
+</script>
+<script src="resona_chat_photo_flow/claim_flow.js"></script>
+</body>
+</html>

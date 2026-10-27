@@ -1,0 +1,1462 @@
+<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resona Vision Labeler</title>
+<style>
+body{font:16px Arial;margin:20px;background:#f5f1e9;color:#222}
+header{position:sticky;top:0;background:#f5f1e9;padding:12px;z-index:2}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{background:white;border-radius:10px;padding:12px;overflow-wrap:anywhere}
+img{width:100%;height:210px;object-fit:contain;background:#eee}
+label{display:block;margin:12px 0;font-weight:bold}
+select,button{width:100%;padding:10px;margin-top:5px;font-size:16px}
+button{cursor:pointer;background:#8d352d;color:white;border:0;border-radius:6px}
+</style></head><body>
+<header><h1>Resona Vision — Label Photos</h1>
+<p>For each image, label photo usability and visible product damage.</p>
+<p id="count"></p>
+<button onclick="saveLabels()">Save labels to CSV</button>
+<p id="status">Changes are not saved until you click Save.</p></header>
+<div class="grid">
+    <article class="card" data-index="0">
+      <img src="dev/P1_angle%20%282%29.jpeg" loading="lazy" alt="P1_angle (2).jpeg">
+      <h3>P1_angle (2).jpeg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="1">
+      <img src="test/P1_angle%20%283%29.jpeg" loading="lazy" alt="P1_angle (3).jpeg">
+      <h3>P1_angle (3).jpeg</h3>
+      <p>Product: P1 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="2">
+      <img src="test/P1_angle%20%284%29.jpeg" loading="lazy" alt="P1_angle (4).jpeg">
+      <h3>P1_angle (4).jpeg</h3>
+      <p>Product: P1 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="3">
+      <img src="dev/P1_angle.jpeg" loading="lazy" alt="P1_angle.jpeg">
+      <h3>P1_angle.jpeg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="4">
+      <img src="dev/P1_clear.jpeg" loading="lazy" alt="P1_clear.jpeg">
+      <h3>P1_clear.jpeg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="5">
+      <img src="dev/P1_damaged.jpeg" loading="lazy" alt="P1_damaged.jpeg">
+      <h3>P1_damaged.jpeg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="6">
+      <img src="dev/P1_far.jpeg" loading="lazy" alt="P1_far.jpeg">
+      <h3>P1_far.jpeg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="7">
+      <img src="dev/P1_reference.jpg" loading="lazy" alt="P1_reference.jpg">
+      <h3>P1_reference.jpg</h3>
+      <p>Product: P1 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="8">
+      <img src="dev/P2_angle.jpeg" loading="lazy" alt="P2_angle.jpeg">
+      <h3>P2_angle.jpeg</h3>
+      <p>Product: P2 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="9">
+      <img src="dev/P2_clear.jpeg" loading="lazy" alt="P2_clear.jpeg">
+      <h3>P2_clear.jpeg</h3>
+      <p>Product: P2 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="10">
+      <img src="dev/P2_far.jpeg" loading="lazy" alt="P2_far.jpeg">
+      <h3>P2_far.jpeg</h3>
+      <p>Product: P2 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="11">
+      <img src="dev/P2_reference.jpg" loading="lazy" alt="P2_reference.jpg">
+      <h3>P2_reference.jpg</h3>
+      <p>Product: P2 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="12">
+      <img src="dev/P3_angle%20%282%29.jpeg" loading="lazy" alt="P3_angle (2).jpeg">
+      <h3>P3_angle (2).jpeg</h3>
+      <p>Product: P3 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="13">
+      <img src="test/P3_angle.jpeg" loading="lazy" alt="P3_angle.jpeg">
+      <h3>P3_angle.jpeg</h3>
+      <p>Product: P3 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="14">
+      <img src="dev/P3_blur.jpeg" loading="lazy" alt="P3_blur.jpeg">
+      <h3>P3_blur.jpeg</h3>
+      <p>Product: P3 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="15">
+      <img src="dev/P3_clear.jpeg" loading="lazy" alt="P3_clear.jpeg">
+      <h3>P3_clear.jpeg</h3>
+      <p>Product: P3 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="16">
+      <img src="dev/P3_far.jpeg" loading="lazy" alt="P3_far.jpeg">
+      <h3>P3_far.jpeg</h3>
+      <p>Product: P3 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="17">
+      <img src="dev/P3_reference.jpg" loading="lazy" alt="P3_reference.jpg">
+      <h3>P3_reference.jpg</h3>
+      <p>Product: P3 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="18">
+      <img src="dev/P4_damage%20%282%29.jpeg" loading="lazy" alt="P4_damage (2).jpeg">
+      <h3>P4_damage (2).jpeg</h3>
+      <p>Product: P4 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="19">
+      <img src="test/P4_damage%20%283%29.jpeg" loading="lazy" alt="P4_damage (3).jpeg">
+      <h3>P4_damage (3).jpeg</h3>
+      <p>Product: P4 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="20">
+      <img src="dev/P4_damage.jpeg" loading="lazy" alt="P4_damage.jpeg">
+      <h3>P4_damage.jpeg</h3>
+      <p>Product: P4 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="21">
+      <img src="dev/P4_far.jpeg" loading="lazy" alt="P4_far.jpeg">
+      <h3>P4_far.jpeg</h3>
+      <p>Product: P4 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="22">
+      <img src="dev/P4_reference.png" loading="lazy" alt="P4_reference.png">
+      <h3>P4_reference.png</h3>
+      <p>Product: P4 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="23">
+      <img src="dev/P5_angle%20%282%29.jpeg" loading="lazy" alt="P5_angle (2).jpeg">
+      <h3>P5_angle (2).jpeg</h3>
+      <p>Product: P5 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="24">
+      <img src="test/P5_angle.jpeg" loading="lazy" alt="P5_angle.jpeg">
+      <h3>P5_angle.jpeg</h3>
+      <p>Product: P5 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="25">
+      <img src="dev/P5_clear.jpeg" loading="lazy" alt="P5_clear.jpeg">
+      <h3>P5_clear.jpeg</h3>
+      <p>Product: P5 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="26">
+      <img src="dev/P5_damage%20%282%29.jpeg" loading="lazy" alt="P5_damage (2).jpeg">
+      <h3>P5_damage (2).jpeg</h3>
+      <p>Product: P5 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="27">
+      <img src="test/P5_damage.jpeg" loading="lazy" alt="P5_damage.jpeg">
+      <h3>P5_damage.jpeg</h3>
+      <p>Product: P5 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="28">
+      <img src="dev/P5_far.jpeg" loading="lazy" alt="P5_far.jpeg">
+      <h3>P5_far.jpeg</h3>
+      <p>Product: P5 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="29">
+      <img src="dev/P5_reference.png" loading="lazy" alt="P5_reference.png">
+      <h3>P5_reference.png</h3>
+      <p>Product: P5 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="30">
+      <img src="test/P6_damage%20%282%29.jpeg" loading="lazy" alt="P6_damage (2).jpeg">
+      <h3>P6_damage (2).jpeg</h3>
+      <p>Product: P6 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="31">
+      <img src="dev/P6_damage%20%283%29.jpeg" loading="lazy" alt="P6_damage (3).jpeg">
+      <h3>P6_damage (3).jpeg</h3>
+      <p>Product: P6 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="32">
+      <img src="dev/P6_damage.jpeg" loading="lazy" alt="P6_damage.jpeg">
+      <h3>P6_damage.jpeg</h3>
+      <p>Product: P6 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="33">
+      <img src="dev/P6_reference.png" loading="lazy" alt="P6_reference.png">
+      <h3>P6_reference.png</h3>
+      <p>Product: P6 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="34">
+      <img src="dev/P7_angle%20%282%29.jpeg" loading="lazy" alt="P7_angle (2).jpeg">
+      <h3>P7_angle (2).jpeg</h3>
+      <p>Product: P7 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="35">
+      <img src="test/P7_angle%20%283%29.jpeg" loading="lazy" alt="P7_angle (3).jpeg">
+      <h3>P7_angle (3).jpeg</h3>
+      <p>Product: P7 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="36">
+      <img src="dev/P7_angle.jpeg" loading="lazy" alt="P7_angle.jpeg">
+      <h3>P7_angle.jpeg</h3>
+      <p>Product: P7 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="37">
+      <img src="dev/P7_blur%20%282%29.jpeg" loading="lazy" alt="P7_blur (2).jpeg">
+      <h3>P7_blur (2).jpeg</h3>
+      <p>Product: P7 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="38">
+      <img src="test/P7_blur.jpeg" loading="lazy" alt="P7_blur.jpeg">
+      <h3>P7_blur.jpeg</h3>
+      <p>Product: P7 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="39">
+      <img src="dev/P7_clear.jpeg" loading="lazy" alt="P7_clear.jpeg">
+      <h3>P7_clear.jpeg</h3>
+      <p>Product: P7 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="40">
+      <img src="dev/P7_reference.jpeg" loading="lazy" alt="P7_reference.jpeg">
+      <h3>P7_reference.jpeg</h3>
+      <p>Product: P7 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="41">
+      <img src="dev/P8_angle%20%282%29.jpeg" loading="lazy" alt="P8_angle (2).jpeg">
+      <h3>P8_angle (2).jpeg</h3>
+      <p>Product: P8 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="42">
+      <img src="test/P8_angle.jpeg" loading="lazy" alt="P8_angle.jpeg">
+      <h3>P8_angle.jpeg</h3>
+      <p>Product: P8 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="43">
+      <img src="dev/P8_black.jpeg" loading="lazy" alt="P8_black.jpeg">
+      <h3>P8_black.jpeg</h3>
+      <p>Product: P8 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="44">
+      <img src="dev/P8_clear.jpeg" loading="lazy" alt="P8_clear.jpeg">
+      <h3>P8_clear.jpeg</h3>
+      <p>Product: P8 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="45">
+      <img src="dev/P8_far.jpeg" loading="lazy" alt="P8_far.jpeg">
+      <h3>P8_far.jpeg</h3>
+      <p>Product: P8 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="46">
+      <img src="dev/P8_reference.jpeg" loading="lazy" alt="P8_reference.jpeg">
+      <h3>P8_reference.jpeg</h3>
+      <p>Product: P8 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="47">
+      <img src="dev/P9_angle%20%282%29.jpeg" loading="lazy" alt="P9_angle (2).jpeg">
+      <h3>P9_angle (2).jpeg</h3>
+      <p>Product: P9 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="48">
+      <img src="test/P9_angle.jpeg" loading="lazy" alt="P9_angle.jpeg">
+      <h3>P9_angle.jpeg</h3>
+      <p>Product: P9 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="49">
+      <img src="dev/P9_blur.jpeg" loading="lazy" alt="P9_blur.jpeg">
+      <h3>P9_blur.jpeg</h3>
+      <p>Product: P9 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="50">
+      <img src="dev/P9_far.jpeg" loading="lazy" alt="P9_far.jpeg">
+      <h3>P9_far.jpeg</h3>
+      <p>Product: P9 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="51">
+      <img src="dev/P9_reference.jpeg" loading="lazy" alt="P9_reference.jpeg">
+      <h3>P9_reference.jpeg</h3>
+      <p>Product: P9 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="52">
+      <img src="dev/P10_angle%20%282%29.jpeg" loading="lazy" alt="P10_angle (2).jpeg">
+      <h3>P10_angle (2).jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="53">
+      <img src="test/P10_angle%20%283%29.jpeg" loading="lazy" alt="P10_angle (3).jpeg">
+      <h3>P10_angle (3).jpeg</h3>
+      <p>Product: P10 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="54">
+      <img src="dev/P10_angle%20%284%29.jpeg" loading="lazy" alt="P10_angle (4).jpeg">
+      <h3>P10_angle (4).jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="55">
+      <img src="test/P10_angle%20%285%29.jpeg" loading="lazy" alt="P10_angle (5).jpeg">
+      <h3>P10_angle (5).jpeg</h3>
+      <p>Product: P10 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="56">
+      <img src="dev/P10_angle.jpeg" loading="lazy" alt="P10_angle.jpeg">
+      <h3>P10_angle.jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="57">
+      <img src="test/P10_black%20%282%29.jpeg" loading="lazy" alt="P10_black (2).jpeg">
+      <h3>P10_black (2).jpeg</h3>
+      <p>Product: P10 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="58">
+      <img src="dev/P10_black.jpeg" loading="lazy" alt="P10_black.jpeg">
+      <h3>P10_black.jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="59">
+      <img src="dev/P10_blur%20%282%29.jpeg" loading="lazy" alt="P10_blur (2).jpeg">
+      <h3>P10_blur (2).jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="60">
+      <img src="test/P10_blur.jpeg" loading="lazy" alt="P10_blur.jpeg">
+      <h3>P10_blur.jpeg</h3>
+      <p>Product: P10 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="61">
+      <img src="dev/P10_clear.jpeg" loading="lazy" alt="P10_clear.jpeg">
+      <h3>P10_clear.jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="62">
+      <img src="dev/P10_reference.jpeg" loading="lazy" alt="P10_reference.jpeg">
+      <h3>P10_reference.jpeg</h3>
+      <p>Product: P10 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="63">
+      <img src="dev/P11_blur.jpeg" loading="lazy" alt="P11_blur.jpeg">
+      <h3>P11_blur.jpeg</h3>
+      <p>Product: P11 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="64">
+      <img src="dev/P11_clear.jpeg" loading="lazy" alt="P11_clear.jpeg">
+      <h3>P11_clear.jpeg</h3>
+      <p>Product: P11 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="65">
+      <img src="dev/P11_reference.jpeg" loading="lazy" alt="P11_reference.jpeg">
+      <h3>P11_reference.jpeg</h3>
+      <p>Product: P11 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="66">
+      <img src="dev/P12_black.jpeg" loading="lazy" alt="P12_black.jpeg">
+      <h3>P12_black.jpeg</h3>
+      <p>Product: P12 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="67">
+      <img src="dev/P12_blur.jpeg" loading="lazy" alt="P12_blur.jpeg">
+      <h3>P12_blur.jpeg</h3>
+      <p>Product: P12 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="68">
+      <img src="dev/P12_reference.jpeg" loading="lazy" alt="P12_reference.jpeg">
+      <h3>P12_reference.jpeg</h3>
+      <p>Product: P12 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="69">
+      <img src="dev/P13_clear.jpeg" loading="lazy" alt="P13_clear.jpeg">
+      <h3>P13_clear.jpeg</h3>
+      <p>Product: P13 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="70">
+      <img src="dev/P13_reference.jpeg" loading="lazy" alt="P13_reference.jpeg">
+      <h3>P13_reference.jpeg</h3>
+      <p>Product: P13 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="71">
+      <img src="test/P14_angle%20%282%29.jpeg" loading="lazy" alt="P14_angle (2).jpeg">
+      <h3>P14_angle (2).jpeg</h3>
+      <p>Product: P14 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="72">
+      <img src="dev/P14_angle.jpeg" loading="lazy" alt="P14_angle.jpeg">
+      <h3>P14_angle.jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="73">
+      <img src="dev/P14_black.jpeg" loading="lazy" alt="P14_black.jpeg">
+      <h3>P14_black.jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="74">
+      <img src="dev/P14_damage%20%282%29.jpeg" loading="lazy" alt="P14_damage (2).jpeg">
+      <h3>P14_damage (2).jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="75">
+      <img src="test/P14_damage%20%283%29.jpeg" loading="lazy" alt="P14_damage (3).jpeg">
+      <h3>P14_damage (3).jpeg</h3>
+      <p>Product: P14 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="76">
+      <img src="dev/P14_damage%20%284%29.jpeg" loading="lazy" alt="P14_damage (4).jpeg">
+      <h3>P14_damage (4).jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="77">
+      <img src="test/P14_damage%20%285%29.jpeg" loading="lazy" alt="P14_damage (5).jpeg">
+      <h3>P14_damage (5).jpeg</h3>
+      <p>Product: P14 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="78">
+      <img src="dev/P14_damage.jpeg" loading="lazy" alt="P14_damage.jpeg">
+      <h3>P14_damage.jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" selected>unknown</option><option value="none" >none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="79">
+      <img src="dev/P14_reference.jpeg" loading="lazy" alt="P14_reference.jpeg">
+      <h3>P14_reference.jpeg</h3>
+      <p>Product: P14 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="80">
+      <img src="dev/P15_angle.jpeg" loading="lazy" alt="P15_angle.jpeg">
+      <h3>P15_angle.jpeg</h3>
+      <p>Product: P15 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="81">
+      <img src="test/P15_damage%20%282%29.jpeg" loading="lazy" alt="P15_damage (2).jpeg">
+      <h3>P15_damage (2).jpeg</h3>
+      <p>Product: P15 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="82">
+      <img src="dev/P15_damage.jpeg" loading="lazy" alt="P15_damage.jpeg">
+      <h3>P15_damage.jpeg</h3>
+      <p>Product: P15 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" selected>unknown</option><option value="ok" >ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="83">
+      <img src="dev/P15_reference.jpeg" loading="lazy" alt="P15_reference.jpeg">
+      <h3>P15_reference.jpeg</h3>
+      <p>Product: P15 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="84">
+      <img src="dev/P16_black.jpeg" loading="lazy" alt="P16_black.jpeg">
+      <h3>P16_black.jpeg</h3>
+      <p>Product: P16 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" >none</option><option value="damaged" selected>damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="85">
+      <img src="test/P16_blur%20%282%29.jpeg" loading="lazy" alt="P16_blur (2).jpeg">
+      <h3>P16_blur (2).jpeg</h3>
+      <p>Product: P16 | Split: test</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="86">
+      <img src="dev/P16_blur.jpeg" loading="lazy" alt="P16_blur.jpeg">
+      <h3>P16_blur.jpeg</h3>
+      <p>Product: P16 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" >ok</option><option value="bad" selected>bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="87">
+      <img src="dev/P16_far.jpeg" loading="lazy" alt="P16_far.jpeg">
+      <h3>P16_far.jpeg</h3>
+      <p>Product: P16 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+
+    <article class="card" data-index="88">
+      <img src="dev/P16_reference.jpeg" loading="lazy" alt="P16_reference.jpeg">
+      <h3>P16_reference.jpeg</h3>
+      <p>Product: P16 | Split: dev</p>
+      <label>Quality
+        <select class="quality">
+          <option value="unknown" >unknown</option><option value="ok" selected>ok</option><option value="bad" >bad</option>
+        </select>
+      </label>
+      <label>Damage
+        <select class="damage">
+          <option value="unknown" >unknown</option><option value="none" selected>none</option><option value="damaged" >damaged</option>
+        </select>
+      </label>
+    </article>
+</div><script>
+const rows = [{"file": "dev/P1_angle (2).jpeg", "product": "P1", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "test/P1_angle (3).jpeg", "product": "P1", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "test"}, {"file": "test/P1_angle (4).jpeg", "product": "P1", "photo_type": "angle", "quality": "unknown", "damage": "none", "split": "test"}, {"file": "dev/P1_angle.jpeg", "product": "P1", "photo_type": "angle", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "dev/P1_clear.jpeg", "product": "P1", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P1_damaged.jpeg", "product": "P1", "photo_type": "damage", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "dev/P1_far.jpeg", "product": "P1", "photo_type": "far", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P1_reference.jpg", "product": "P1", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P2_angle.jpeg", "product": "P2", "photo_type": "angle", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "dev/P2_clear.jpeg", "product": "P2", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P2_far.jpeg", "product": "P2", "photo_type": "far", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P2_reference.jpg", "product": "P2", "photo_type": "reference", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P3_angle (2).jpeg", "product": "P3", "photo_type": "angle", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "test/P3_angle.jpeg", "product": "P3", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P3_blur.jpeg", "product": "P3", "photo_type": "blur", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "dev/P3_clear.jpeg", "product": "P3", "photo_type": "clear", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P3_far.jpeg", "product": "P3", "photo_type": "far", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "dev/P3_reference.jpg", "product": "P3", "photo_type": "reference", "quality": "unknown", "damage": "none", "split": "dev"}, {"file": "dev/P4_damage (2).jpeg", "product": "P4", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "test/P4_damage (3).jpeg", "product": "P4", "photo_type": "damage", "quality": "ok", "damage": "damaged", "split": "test"}, {"file": "dev/P4_damage.jpeg", "product": "P4", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "dev/P4_far.jpeg", "product": "P4", "photo_type": "far", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "dev/P4_reference.png", "product": "P4", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P5_angle (2).jpeg", "product": "P5", "photo_type": "angle", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "test/P5_angle.jpeg", "product": "P5", "photo_type": "angle", "quality": "bad", "damage": "damaged", "split": "test"}, {"file": "dev/P5_clear.jpeg", "product": "P5", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P5_damage (2).jpeg", "product": "P5", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "test/P5_damage.jpeg", "product": "P5", "photo_type": "damage", "quality": "ok", "damage": "damaged", "split": "test"}, {"file": "dev/P5_far.jpeg", "product": "P5", "photo_type": "far", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "dev/P5_reference.png", "product": "P5", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "test/P6_damage (2).jpeg", "product": "P6", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "test"}, {"file": "dev/P6_damage (3).jpeg", "product": "P6", "photo_type": "damage", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "dev/P6_damage.jpeg", "product": "P6", "photo_type": "damage", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "dev/P6_reference.png", "product": "P6", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P7_angle (2).jpeg", "product": "P7", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "test/P7_angle (3).jpeg", "product": "P7", "photo_type": "angle", "quality": "unknown", "damage": "none", "split": "test"}, {"file": "dev/P7_angle.jpeg", "product": "P7", "photo_type": "angle", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P7_blur (2).jpeg", "product": "P7", "photo_type": "blur", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "test/P7_blur.jpeg", "product": "P7", "photo_type": "blur", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P7_clear.jpeg", "product": "P7", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P7_reference.jpeg", "product": "P7", "photo_type": "reference", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "dev/P8_angle (2).jpeg", "product": "P8", "photo_type": "angle", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "test/P8_angle.jpeg", "product": "P8", "photo_type": "angle", "quality": "unknown", "damage": "none", "split": "test"}, {"file": "dev/P8_black.jpeg", "product": "P8", "photo_type": "dark", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "dev/P8_clear.jpeg", "product": "P8", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P8_far.jpeg", "product": "P8", "photo_type": "far", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P8_reference.jpeg", "product": "P8", "photo_type": "reference", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "dev/P9_angle (2).jpeg", "product": "P9", "photo_type": "angle", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "test/P9_angle.jpeg", "product": "P9", "photo_type": "angle", "quality": "unknown", "damage": "none", "split": "test"}, {"file": "dev/P9_blur.jpeg", "product": "P9", "photo_type": "blur", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P9_far.jpeg", "product": "P9", "photo_type": "far", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "dev/P9_reference.jpeg", "product": "P9", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P10_angle (2).jpeg", "product": "P10", "photo_type": "angle", "quality": "unknown", "damage": "none", "split": "dev"}, {"file": "test/P10_angle (3).jpeg", "product": "P10", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P10_angle (4).jpeg", "product": "P10", "photo_type": "angle", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "test/P10_angle (5).jpeg", "product": "P10", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P10_angle.jpeg", "product": "P10", "photo_type": "angle", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "test/P10_black (2).jpeg", "product": "P10", "photo_type": "dark", "quality": "ok", "damage": "damaged", "split": "test"}, {"file": "dev/P10_black.jpeg", "product": "P10", "photo_type": "dark", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "dev/P10_blur (2).jpeg", "product": "P10", "photo_type": "blur", "quality": "unknown", "damage": "none", "split": "dev"}, {"file": "test/P10_blur.jpeg", "product": "P10", "photo_type": "blur", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P10_clear.jpeg", "product": "P10", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P10_reference.jpeg", "product": "P10", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P11_blur.jpeg", "product": "P11", "photo_type": "blur", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "dev/P11_clear.jpeg", "product": "P11", "photo_type": "clear", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P11_reference.jpeg", "product": "P11", "photo_type": "reference", "quality": "unknown", "damage": "unknown", "split": "dev"}, {"file": "dev/P12_black.jpeg", "product": "P12", "photo_type": "dark", "quality": "unknown", "damage": "unknown", "split": "dev"}, {"file": "dev/P12_blur.jpeg", "product": "P12", "photo_type": "blur", "quality": "bad", "damage": "unknown", "split": "dev"}, {"file": "dev/P12_reference.jpeg", "product": "P12", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P13_clear.jpeg", "product": "P13", "photo_type": "clear", "quality": "unknown", "damage": "none", "split": "dev"}, {"file": "dev/P13_reference.jpeg", "product": "P13", "photo_type": "reference", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "test/P14_angle (2).jpeg", "product": "P14", "photo_type": "angle", "quality": "ok", "damage": "damaged", "split": "test"}, {"file": "dev/P14_angle.jpeg", "product": "P14", "photo_type": "angle", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P14_black.jpeg", "product": "P14", "photo_type": "dark", "quality": "bad", "damage": "unknown", "split": "dev"}, {"file": "dev/P14_damage (2).jpeg", "product": "P14", "photo_type": "damage", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "test/P14_damage (3).jpeg", "product": "P14", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "test"}, {"file": "dev/P14_damage (4).jpeg", "product": "P14", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "test/P14_damage (5).jpeg", "product": "P14", "photo_type": "damage", "quality": "bad", "damage": "damaged", "split": "test"}, {"file": "dev/P14_damage.jpeg", "product": "P14", "photo_type": "damage", "quality": "ok", "damage": "unknown", "split": "dev"}, {"file": "dev/P14_reference.jpeg", "product": "P14", "photo_type": "reference", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "dev/P15_angle.jpeg", "product": "P15", "photo_type": "angle", "quality": "bad", "damage": "damaged", "split": "dev"}, {"file": "test/P15_damage (2).jpeg", "product": "P15", "photo_type": "damage", "quality": "unknown", "damage": "damaged", "split": "test"}, {"file": "dev/P15_damage.jpeg", "product": "P15", "photo_type": "damage", "quality": "unknown", "damage": "damaged", "split": "dev"}, {"file": "dev/P15_reference.jpeg", "product": "P15", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P16_black.jpeg", "product": "P16", "photo_type": "dark", "quality": "ok", "damage": "damaged", "split": "dev"}, {"file": "test/P16_blur (2).jpeg", "product": "P16", "photo_type": "blur", "quality": "ok", "damage": "none", "split": "test"}, {"file": "dev/P16_blur.jpeg", "product": "P16", "photo_type": "blur", "quality": "bad", "damage": "none", "split": "dev"}, {"file": "dev/P16_far.jpeg", "product": "P16", "photo_type": "far", "quality": "ok", "damage": "none", "split": "dev"}, {"file": "dev/P16_reference.jpeg", "product": "P16", "photo_type": "reference", "quality": "ok", "damage": "none", "split": "dev"}];
+document.getElementById('count').textContent = rows.length + ' images';
+function csvEscape(v){return '"' + String(v ?? '').replace(/"/g,'""') + '"';}
+function saveLabels(){
+  document.querySelectorAll('.card').forEach(card=>{
+    const r=rows[Number(card.dataset.index)];
+    r.quality=card.querySelector('.quality').value;
+    r.damage=card.querySelector('.damage').value;
+  });
+  const cols=['file','product','photo_type','quality','damage','split'];
+  const csv=[cols.join(','),...rows.map(r=>cols.map(c=>csvEscape(r[c])).join(','))].join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='labels.csv';a.click();
+  URL.revokeObjectURL(a.href);
+  document.getElementById('status').textContent=
+    'CSV downloaded. Replace dataset/labels.csv with the downloaded file.';
+}
+</script></body></html>

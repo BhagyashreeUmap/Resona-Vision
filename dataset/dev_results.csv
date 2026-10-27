@@ -1,0 +1,70 @@
+﻿file,product,expected_quality,predicted_quality,expected_damage,predicted_damage,product_status,evidence_score,reason_codes
+dev/P1_angle (2).jpeg,P1,ok,bad,none,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P1_angle.jpeg,P1,bad,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P1_clear.jpeg,P1,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P1_damaged.jpeg,P1,ok,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P1_far.jpeg,P1,ok,ok,unknown,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P1_reference.jpg,P1,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P2_angle.jpeg,P2,bad,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P2_clear.jpeg,P2,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P2_far.jpeg,P2,ok,ok,none,LIKELY,MATCH,100,PRODUCT_MATCH|DAMAGE_LIKELY
+dev/P2_reference.jpg,P2,ok,ok,unknown,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P3_angle (2).jpeg,P3,bad,ok,none,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P3_blur.jpeg,P3,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P3_clear.jpeg,P3,ok,ok,unknown,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P3_far.jpeg,P3,bad,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P3_reference.jpg,P3,unknown,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P4_damage (2).jpeg,P4,bad,bad,damaged,UNKNOWN,WEAK,0,TOO_BLURRY|PRODUCT_WEAK
+dev/P4_damage.jpeg,P4,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P4_far.jpeg,P4,ok,bad,damaged,UNKNOWN,NO_MATCH,0,LOW_CONTRAST|PRODUCT_NO_MATCH
+dev/P4_reference.png,P4,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P5_angle (2).jpeg,P5,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|LOW_CONTRAST|PRODUCT_NO_MATCH
+dev/P5_clear.jpeg,P5,ok,bad,none,UNKNOWN,NO_MATCH,0,TOO_BLURRY|LOW_CONTRAST|PRODUCT_NO_MATCH
+dev/P5_damage (2).jpeg,P5,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P5_far.jpeg,P5,ok,bad,none,UNKNOWN,WEAK,0,TOO_BLURRY|PRODUCT_WEAK
+dev/P5_reference.png,P5,ok,bad,none,NONE,MATCH,35,TOO_BLURRY|PRODUCT_MATCH|DAMAGE_NONE
+dev/P6_damage (3).jpeg,P6,bad,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P6_damage.jpeg,P6,ok,ok,damaged,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P6_reference.png,P6,ok,bad,none,NONE,MATCH,35,TOO_BLURRY|PRODUCT_MATCH|DAMAGE_NONE
+dev/P7_angle (2).jpeg,P7,ok,bad,none,UNKNOWN,WEAK,0,TOO_BLURRY|PRODUCT_WEAK
+dev/P7_angle.jpeg,P7,ok,bad,unknown,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P7_blur (2).jpeg,P7,ok,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P7_clear.jpeg,P7,ok,bad,none,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P7_reference.jpeg,P7,bad,bad,none,NONE,MATCH,35,TOO_BLURRY|PRODUCT_MATCH|DAMAGE_NONE
+dev/P8_angle (2).jpeg,P8,ok,ok,unknown,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P8_black.jpeg,P8,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P8_clear.jpeg,P8,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P8_far.jpeg,P8,ok,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P8_reference.jpeg,P8,bad,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P9_angle (2).jpeg,P9,ok,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P9_blur.jpeg,P9,ok,ok,unknown,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P9_far.jpeg,P9,ok,bad,damaged,UNKNOWN,WEAK,0,TOO_BLURRY|PRODUCT_WEAK
+dev/P9_reference.jpeg,P9,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P10_angle (2).jpeg,P10,unknown,bad,none,UNKNOWN,WEAK,0,TOO_BLURRY|PRODUCT_WEAK
+dev/P10_angle (4).jpeg,P10,ok,ok,unknown,LIKELY,MATCH,100,PRODUCT_MATCH|DAMAGE_LIKELY
+dev/P10_angle.jpeg,P10,ok,ok,damaged,LIKELY,MATCH,100,PRODUCT_MATCH|DAMAGE_LIKELY
+dev/P10_black.jpeg,P10,unknown,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P10_blur (2).jpeg,P10,unknown,bad,none,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P10_clear.jpeg,P10,ok,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P10_reference.jpeg,P10,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P11_blur.jpeg,P11,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P11_clear.jpeg,P11,ok,ok,none,UNKNOWN,WEAK,25,PRODUCT_WEAK
+dev/P11_reference.jpeg,P11,unknown,ok,unknown,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P12_black.jpeg,P12,unknown,ok,unknown,LIKELY,MATCH,100,PRODUCT_MATCH|DAMAGE_LIKELY
+dev/P12_blur.jpeg,P12,bad,bad,unknown,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P12_reference.jpeg,P12,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P13_clear.jpeg,P13,unknown,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P13_reference.jpeg,P13,ok,ok,unknown,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P14_angle.jpeg,P14,ok,ok,none,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P14_black.jpeg,P14,bad,bad,unknown,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P14_damage (2).jpeg,P14,unknown,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P14_damage (4).jpeg,P14,bad,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P14_damage.jpeg,P14,ok,ok,unknown,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P14_reference.jpeg,P14,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P15_angle.jpeg,P15,bad,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P15_damage.jpeg,P15,unknown,ok,damaged,UNKNOWN,NO_MATCH,25,PRODUCT_NO_MATCH
+dev/P15_reference.jpeg,P15,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE
+dev/P16_black.jpeg,P16,ok,bad,damaged,UNKNOWN,NO_MATCH,0,TOO_BLURRY|TOO_BRIGHT|LOW_CONTRAST|PRODUCT_NO_MATCH
+dev/P16_blur.jpeg,P16,bad,bad,none,UNKNOWN,NO_MATCH,0,TOO_BLURRY|PRODUCT_NO_MATCH
+dev/P16_far.jpeg,P16,ok,ok,none,LIKELY,MATCH,100,PRODUCT_MATCH|DAMAGE_LIKELY
+dev/P16_reference.jpeg,P16,ok,ok,none,NONE,MATCH,60,PRODUCT_MATCH|DAMAGE_NONE

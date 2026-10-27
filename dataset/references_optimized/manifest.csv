@@ -1,0 +1,13 @@
+DatasetProductId,LocalFile,S3Key,OriginalQuality,DamageLabel
+P1,D:\Resona-Vision\dataset\references_optimized\P1_reference.jpg,reference/P1_reference.jpg,ok,none
+P2,D:\Resona-Vision\dataset\references_optimized\P2_reference.jpg,reference/P2_reference.jpg,ok,unknown
+P4,D:\Resona-Vision\dataset\references_optimized\P4_reference.jpg,reference/P4_reference.jpg,ok,none
+P5,D:\Resona-Vision\dataset\references_optimized\P5_reference.jpg,reference/P5_reference.jpg,ok,none
+P6,D:\Resona-Vision\dataset\references_optimized\P6_reference.jpg,reference/P6_reference.jpg,ok,none
+P9,D:\Resona-Vision\dataset\references_optimized\P9_reference.jpg,reference/P9_reference.jpg,ok,none
+P10,D:\Resona-Vision\dataset\references_optimized\P10_reference.jpg,reference/P10_reference.jpg,ok,none
+P12,D:\Resona-Vision\dataset\references_optimized\P12_reference.jpg,reference/P12_reference.jpg,ok,none
+P13,D:\Resona-Vision\dataset\references_optimized\P13_reference.jpg,reference/P13_reference.jpg,ok,unknown
+P14,D:\Resona-Vision\dataset\references_optimized\P14_reference.jpg,reference/P14_reference.jpg,ok,none
+P15,D:\Resona-Vision\dataset\references_optimized\P15_reference.jpg,reference/P15_reference.jpg,ok,none
+P16,D:\Resona-Vision\dataset\references_optimized\P16_reference.jpg,reference/P16_reference.jpg,ok,none
